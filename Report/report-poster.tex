@@ -1,0 +1,352 @@
+%%
+%% This is file `tikzposter-template.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% tikzposter.dtx  (with options: `tikzposter-template.tex')
+%%
+%% This is a generated file.
+%%
+%% Copyright (C) 2014 by Pascal Richter, Elena Botoeva, Richard Barnard, and Dirk Surmann
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 2.0 of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 2.0 or later is part of all distributions of
+%% LaTeX version 2013/12/01 or later.
+%%
+
+
+\documentclass{tikzposter} %Options for format can be included here
+
+\usepackage{todonotes}
+
+\usepackage[tikz]{bclogo}
+\usepackage{lipsum}
+\usepackage{amsmath}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[absolute]{textpos}
+\usepackage[it]{subfigure}
+\usepackage{graphicx}
+\usepackage{cmbright}
+%\usepackage[default]{cantarell}
+%\usepackage{avant}
+%\usepackage[math]{iwona}
+\usepackage[math]{kurier}
+\usepackage[T1]{fontenc}
+
+
+%% add your packages here
+\usepackage{hyperref}
+% for random text
+\usepackage{lipsum}
+\usepackage[english]{babel}
+\usepackage[pangram]{blindtext}
+
+\colorlet{backgroundcolor}{blue!10}
+
+ % Title, Author, Institute
+\title{Titanic: Machine Learning from Disaster}
+\author{Ziqi Lin}
+\institute{Nanjing University of Science and Technology}
+%\titlegraphic{logos/tulip-logo.eps}
+
+%Choose Layout
+\usetheme{Wave}
+
+%\definebackgroundstyle{samplebackgroundstyle}{
+%\draw[inner sep=0pt, line width=0pt, color=red, fill=backgroundcolor!30!black]
+%(bottomleft) rectangle (topright);
+%}
+%
+%\colorlet{backgroundcolor}{blue!10}
+
+\begin{document}
+
+
+\colorlet{blocktitlebgcolor}{blue!23}
+
+ % Title block with title, author, logo, etc.
+\maketitle
+
+\begin{columns}
+ % FIRST column
+\column{0.5}% Width set relative to text width
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+ %\block{Main Objectives}{
+%  	      	\begin{enumerate}
+%  	      	\item Formalise research problem by extending \emph{outlying aspects mining}
+%  	      	\item Proposed \emph{GOAM} algorithm is to solve research problem
+%  	      	\item Utilise pruning strategies to reduce time complexity
+%  	      	\end{enumerate}
+%%  	      \end{minipage}
+%}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\block{Introduction}{
+   The kaggle training project aims to use machine learning to create a model for predicting which passengers survived the Titanic. Firstly, the data were analyzed, and then the Logistic Regression, KNN, Naive Bayes Classifier, Decision Tree, Support Vector Machine and MLP models were respectively used for training. It can be concluded that SVM has the best training effect. Finally, svm is used for prediction, and the result is 0.78947.
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\block{Problem Definition}{
+\begin{itemize}
+    \item
+    %\emph{Group Outlying Aspects Mining}
+    On April 15, 1912, the RMS Titanic, widely considered to be "unsinkable," sank after hitting an iceberg on her maiden voyage. Unfortunately, there were not enough lifeboats on board, resulting in the deaths of 1,502 of the 2,224 passengers and crew. (Survival rate: 0.3246).
+
+    \item
+    While there is some luck involved in survival, it seems that some groups of people are more likely to survive than others.
+\end{itemize}
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+%\note{Note with default behavior}
+
+%\note[targetoffsetx=12cm, targetoffsety=-1cm, angle=20, rotate=25]
+%{Note \\ offset and rotated}
+
+ % First column - second block
+
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\block{Data Analyse}{
+  	Based on the information in the data, the following conclusions can be drawn:
+%    1) Group Feature Extraction,
+%    2) Outlying Degree Scoring, and
+%    3) Outlying Aspects Identification.
+  	
+\begin{tikzfigure}%[Overall architecture of \emph{GOAM} algorithm]
+%  \includegraphics[width=0.8\linewidth]{figures//framework.pdf}
+    \begin{itemize}
+    \item Character Name: Although it is a string, it contains some gender characteristics, such as (Mr, Mrs, Miss).
+    \item Feature Ticket: contains a combination of numbers and letters, so it is difficult to find some patterns.
+    \item Feature Cabin: There are missing values in the cabin. We need to check further to see if there are also missing values in the cabin.
+    \end{itemize}
+\end{tikzfigure}
+		
+\begin{description}
+  	\item[Summary]
+  	PassengerId is ID, Ticket feature is difficult to find regularity, Cabin is too much missing, so it needs to be removed.
+    Sex, Pclass, Age, Embarked on, Fare are very important features, and a certain relationship is established between them.
+    The missing data in Age, Embarked and Fare need to be embarked on.
+
+%    \item
+%    The histogram of $G_q$ on three features are as follows.
+\end{description}
+
+
+\begin{description}
+\item[Outlying Degree Scoring]
+    In this step,
+    we first calculate the \emph{earth mover distance} (EMD) of one feature among different groups.
+    The earth mover distance reflects the minimum mean distance
+    between groups on one feature.
+    So,
+    we utilize the EMD to measure the difference between groups of each feature.
+\end{description}
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\block{Problem Definition}{
+The table below shows the missing data\\
+\begin{tabular}{ c | c | c }
+	\toprule
+	Data & feature  &  count  \\
+	\midrule
+	$train.csv$
+	&  {$Age$} &  {$0.1987$}  \\
+    &  {$Cabin$} &  {$0.771$}  \\
+    &  {$Embarked$} &  {$0.0022$}  \\
+	$test.csv$
+	&  {$Age$} &  {$0.2057$}      \\
+    &  {$Cabin$} &  {$0.6778$}      \\
+    &  {$Fare$} &  {$0.0021$}      \\
+	\bottomrule	
+\end{tabular}
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+% SECOND column
+\column{0.5}
+ %Second column with first block's top edge aligned with with previous column's top.
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\block{Data processing}{
+\begin{description}
+    \item
+    Second,
+    based on the \emph{earth move distance},
+    we calculate the outlying degree.
+\end{description}
+
+\begin{tikzfigure}%[Overall architecture of \emph{GOAM} algorithm]
+    \missingfigure[figcolor=white]{Testing figcolor}
+\end{tikzfigure}
+\item
+\smallskip
+\large
+{Delete invalid feature\\
+After the above analysis, Passengerld, Ticket and Cabin features were removed.\\
+}
+\item
+\smallskip
+\large
+{Extract valid features\\
+}
+\item
+\smallskip
+\large
+{Transformation feature\\
+Since gender is represented as a string, we can represent it numerically.\\
+}
+
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+% Second column - first block
+
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\block[titleleft]{Experiment}
+{
+\begin{description}
+  	\item[Model training], using $50\%$ cross verification.The model completes the classification problem, so there are many machine learning models to choose from.
+\end{description}
+\vspace{.5cm}
+\begin{center}
+\begin{itemize}
+
+\item
+\smallskip
+\large
+{Train\\
+Model: Logistic Regression\\
+
+Mode2: Decision Tree\\
+
+Mode3: KNN\\
+
+Mode4: Naive Bayes Classifier\\
+
+Mode5: SVM\\
+
+Mode6: MLP\\
+}
+
+\end{itemize}
+\end{center}
+\vspace{.2cm}
+\begin{description}
+    \item
+    We can check the weight of each feature in the model. The greater the absolute value of the weight, the greater the impact on the model. We can check the weight of each feature in the model. The greater the absolute value of the weight, the greater the impact on the model.
+\end{description}
+
+\begin{description}
+\item[The training results]of the five models are as follows:
+\end{description}
+\vspace{.5cm}
+\begin{tabular}{ c | c }
+\toprule
+Algorithm & Score  \\
+\midrule
+$Support Vector Machines$
+&  {$0.827142$}\\
+$Decision Tree$
+&  {$0.824920$}\\
+$MLP$
+&  {$0.812592$}\\
+$KNN$
+&  {$0.811437$}\\
+$Logistic Regression$
+&  {$0.806955$}\\
+$Naive Bayes $
+&  {$0.783435$}\\
+\bottomrule	
+\end{tabular}
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+
+% Second column - second block
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\block[titlewidthscale=1, bodywidthscale=1]
+{Conclusion}
+{
+\begin{description}
+    \item
+   We use SVM model for prediction (for simple consideration here, model fusion is not done, and other feature projects are not considered for the time being). We use SVM model for prediction (for simple consideration here, model fusion is not done, and other feature projects are not considered for the time being).
+\end{description}
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+
+% Bottomblock
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+\colorlet{notebgcolor}{blue!20}
+\colorlet{notefrcolor}{blue!20}
+\note[targetoffsetx=8cm, targetoffsety=-4cm, angle=30, rotate=15,
+radius=2cm, width=.26\textwidth]{
+Acknowledgement
+\begin{itemize}
+    \item
+    International Cooperation Project (Y7Z0511101)
+    of IIE,
+    Chinese Academy of Sciences
+ \end{itemize}
+}
+
+%\note[targetoffsetx=8cm, targetoffsety=-10cm,rotate=0,angle=180,radius=8cm,width=.46\textwidth,innersep=.1cm]{
+%Acknowledgement
+%}
+
+%\block[titlewidthscale=0.9, bodywidthscale=0.9]
+%{Acknowledgement}{
+%}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+\end{columns}
+
+
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+%[titleleft, titleoffsetx=2em, titleoffsety=1em, bodyoffsetx=2em,%
+%roundedcorners=10, linewidth=0mm, titlewidthscale=0.7,%
+%bodywidthscale=0.9, titlecenter]
+
+%\colorlet{noteframecolor}{blue!20}
+\colorlet{notebgcolor}{blue!20}
+\colorlet{notefrcolor}{blue!20}
+\note[targetoffsetx=-13cm, targetoffsety=-12cm,rotate=0,angle=180,radius=8cm,width=.96\textwidth,innersep=.4cm]
+{
+\begin{minipage}{0.3\linewidth}
+\centering
+\includegraphics[width=24cm]{./graphics/logos/tulip-wordmark.eps}
+\end{minipage}
+\begin{minipage}{0.7\linewidth}
+{ \centering
+ The $11^{th}$ International Conference on Knowledge Science,
+  Engineering and Management (KSEM 2018),
+  17-19/08/2018, Changchun, China
+}
+\end{minipage}
+}
+%%%%%%%%%% -------------------------------------------------------------------- %%%%%%%%%%
+
+
+\end{document}
+
+%\endinput
+%%
+%% End of file `tikzposter-template.tex'.

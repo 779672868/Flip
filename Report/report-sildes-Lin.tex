@@ -1,0 +1,533 @@
+%
+% ---------------------------------------------------------------
+% Copyright (C) 2012-2018 Gang Li
+% ---------------------------------------------------------------
+%
+% This work is the default powerdot-tuliplab style test file and may be
+% distributed and/or modified under the conditions of the LaTeX Project Public
+% License, either version 1.3 of this license or (at your option) any later
+% version. The latest version of this license is in
+% http://www.latex-project.org/lppl.txt and version 1.3 or later is part of all
+% distributions of LaTeX version 2003/12/01 or later.
+%
+% This work has the LPPL maintenance status "maintained".
+%
+% This Current Maintainer of this work is Gang Li.
+%
+%
+
+\documentclass[
+ size=14pt,
+ paper=smartboard,  %a4paper, smartboard, screen
+ mode=present, 		%present, handout, print
+ display=slides, 	% slidesnotes, notes, slides
+ style=tuliplab,  	% TULIP Lab style
+ pauseslide,
+ fleqn,leqno]{powerdot}
+
+
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{stackengine}
+\usepackage{smartdiagram}
+\usepackage{attrib}
+\usepackage{amssymb}
+\usepackage{amsmath} 
+\usepackage{amsthm} 
+\usepackage{mathtools}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{boxedminipage}
+\usepackage{rotate}
+\usepackage{calc}
+\usepackage[absolute]{textpos}
+\usepackage{psfrag,overpic}
+\usepackage{fouriernc}
+\usepackage{pstricks,pst-3d,pst-grad,pstricks-add,pst-text,pst-node,pst-tree}
+\usepackage{moreverb,epsfig,subfigure}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{etex}
+\usepackage{breqn}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{bibentry}
+\usepackage{gitinfo2}
+\usepackage{siunitx}
+\usepackage{nicefrac}
+%\usepackage{geometry}
+%\geometry{verbose,letterpaper}
+\usepackage{media9}
+\usepackage{animate}
+%\usepackage{movie15}
+\usepackage{auto-pst-pdf}
+
+\usepackage{breakurl}
+\usepackage{fontawesome}
+\usepackage{xcolor}
+\usepackage{multicol}
+
+
+\usepackage{mdwlist} 
+\usepackage{verbatim}
+\usepackage[utf8]{inputenc}
+%\usepackage{dtk-logos}
+\usepackage{C:/texlive/2022/texmf-dist/tex/latex/dtk/dtk-logos}
+\usepackage{tikz}
+\usepackage{adigraph}
+%\usepackage{tkz-graph}
+\usepackage{hyperref}
+%\usepackage{ulem}
+\usepackage{pgfplots}
+\usepackage{verbatim}
+\usepackage{fontawesome}
+
+
+\usepackage{todonotes}
+% \usepackage{pst-rel-points}
+\usepackage{animate}
+\usepackage{fontawesome}
+\usepackage{makecell}
+\usepackage{listings}
+\lstset{frameround=fttt,
+frame=trBL,
+stringstyle=\ttfamily,
+backgroundcolor=\color{yellow!20},
+basicstyle=\footnotesize\ttfamily}
+\lstnewenvironment{code}{
+\lstset{frame=single,escapeinside=`',
+backgroundcolor=\color{yellow!20},
+basicstyle=\footnotesize\ttfamily}
+}{}
+
+
+\usepackage{hyperref}
+\hypersetup{ % TODO: PDF meta Data
+  pdftitle={Presentation Title},
+  pdfauthor={Gang Li},
+  pdfpagemode={FullScreen},
+  pdfborder={0 0 0}
+}
+
+
+% \usepackage{auto-pst-pdf}
+% package to show source code
+
+\definecolor{LightGray}{rgb}{0.9,0.9,0.9}
+\newlength{\pixel}\setlength\pixel{0.000714285714\slidewidth}
+\setlength{\TPHorizModule}{\slidewidth}
+\setlength{\TPVertModule}{\slideheight}
+\newcommand\highlight[1]{\fbox{#1}}
+\newcommand\icite[1]{{\footnotesize [#1]}}
+
+\newcommand\twotonebox[2]{\fcolorbox{pdcolor2}{pdcolor2}
+{#1\vphantom{#2}}\fcolorbox{pdcolor2}{white}{#2\vphantom{#1}}}
+\newcommand\twotoneboxo[2]{\fcolorbox{pdcolor2}{pdcolor2}
+{#1}\fcolorbox{pdcolor2}{white}{#2}}
+\newcommand\vpspace[1]{\vphantom{\vspace{#1}}}
+\newcommand\hpspace[1]{\hphantom{\hspace{#1}}}
+\newcommand\COMMENT[1]{}
+
+\newcommand\placepos[3]{\hbox to\z@{\kern#1
+        \raisebox{-#2}[\z@][\z@]{#3}\hss}\ignorespaces}
+
+\renewcommand{\baselinestretch}{1.2}
+
+
+\newcommand{\draftnote}[3]{
+	\todo[author=#2,color=#1!30,size=\footnotesize]{\textsf{#3}}	}
+% TODO: add yourself here:
+%
+\newcommand{\gangli}[1]{\draftnote{blue}{GLi:}{#1}}
+\newcommand{\shaoni}[1]{\draftnote{green}{sn:}{#1}}
+\newcommand{\gliMarker}
+	{\todo[author=GLi,size=\tiny,inline,color=blue!40]
+	{Gang Li has worked up to here.}}
+\newcommand{\snMarker}
+	{\todo[author=Sn,size=\tiny,inline,color=green!40]
+	{Shaoni has worked up to here.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title
+% TODO: Customize to your Own Title, Name, Address
+%
+\title{Titanic: Machine Learning from Disaster}
+\author{
+Ziqi Lin
+\\
+\\Nanjing University of Science and Technology
+\\Deakin University
+}
+\date{\gitCommitterDate}
+
+
+% Customize the setting of slides
+\pdsetup{
+% TODO: Customize the left footer, and right footer
+rf=\href{http://www.tulip.org.au}{
+Last Changed by: \textsc{\gitCommitterName}\ \gitVtagn -\gitAbbrevHash\ (\gitAuthorDate)
+},
+cf={Traffic Flow Prediction In a U.S Metropolis},
+}
+
+
+\begin{document}
+
+\maketitle
+
+%\begin{slide}{Overview}
+%\tableofcontents[content=sections]
+%\end{slide}
+
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Overview}
+\tableofcontents[content=currentsection,type=1]
+\end{slide}
+%%
+%%==========================================================================================
+
+
+\section{Problem Definition}
+
+
+%%==========================================================================================
+%%
+\begin{slide}{Tabular Playground Series - Sep 2021}
+\begin{center}
+
+\twotonebox{\rotatebox{90}{Defn}}{\parbox{.86\textwidth}
+{The project aims to predict which passengers survived the Titanic sinking
+\begin{itemize}
+\item On April 15, 1912, there were not enough lifeboats on board, resulting in the deaths of 1,502 of the 2,224 passengers and crew. (Survival rate: 0.3246). 
+\item While there is some luck involved in survival, it seems that some groups of people are more likely to survive than others.
+\end{itemize}
+}}
+\end{center}
+\begin{table}[htbp]
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{10pt}
+	\centering
+	\caption{Data}
+\begin{tabular}{ c | c | c }
+	\toprule
+	Data & Count  & feature   \\
+	\midrule
+	$train.csv$
+	&  {$419$} &  {$12$}  \\
+	$test.csv$
+	&  {$892$} &  {$12$}      \\
+	\bottomrule	
+\end{tabular}
+\end{table}
+
+\end{slide}
+%%
+%%==========================================================================================
+\section{Data Analysis}
+%%==========================================================================================
+%%
+\begin{slide}{Data Description}
+\begin{center}
+\begin{table}[htbp]
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{10pt}
+	\centering
+	\caption{Data}
+	\begin{tabular}{ c | c }
+		\toprule
+		feature & feature   \\
+		\midrule
+		$PassengerId$
+		&  {Survived}  \\
+		$Pclass$
+		&  {Name}      \\
+        $Sex$
+        &  {Age}  \\
+        $SibSp$
+        &  {Parch}  \\
+        $Ticket$
+        &  {Fare}  \\
+        $Cabin$
+        &  {Embarked}  \\
+  
+		\bottomrule	
+	\end{tabular}
+\end{table}
+\end{center}
+
+\end{slide}
+%%
+%%==========================================================================================
+\begin{slide}{Data Description}
+\begin{center}
+
+\twotonebox{\rotatebox{90}{Defn}}{\parbox{.86\textwidth}
+{Based on the information in the data, the following conclusions can be drawn:
+\begin{itemize}
+\item Character Name: Although it is a string, it contains some gender characteristics, such as (Mr, Mrs, Miss).
+\item Feature Ticket: contains a combination of numbers and letters, so it is difficult to find some patterns.
+\item Feature Cabin: There are missing values in the cabin. We need to check further to see if there are also missing values in the cabin.
+\end{itemize}
+}}
+\end{center}
+
+\end{slide}
+%%Data structure
+%%==========================================================================================
+\begin{slide}{Data structure}
+\begin{table}[htbp]
+	\setlength{\abovecaptionskip}{0pt}
+	\setlength{\belowcaptionskip}{10pt}
+	\centering
+	\caption{Number of missing features}
+\begin{tabular}{ c | c | c }
+	\toprule
+	Data & feature  &  count  \\
+	\midrule
+	$train.csv$
+	&  {$Age$} &  {$0.1987$}  \\
+    &  {$Cabin$} &  {$0.771$}  \\
+    &  {$Embarked$} &  {$0.0022$}  \\
+	$test.csv$
+	&  {$Age$} &  {$0.2057$}      \\
+    &  {$Cabin$} &  {$0.6778$}      \\
+    &  {$Fare$} &  {$0.0021$}      \\
+	\bottomrule	
+\end{tabular}
+\end{table}
+
+\end{slide}
+%%111
+%%==========================================================================================
+\begin{slide}{The correlation of a single feature to a tag}
+\begin{center}
+\begin{figure}
+	\setlength{\abovecaptionskip}{0.5cm}
+    \centering
+    \includegraphics[scale=0.5]{C:/Users/77967/Desktop/Flip00/2.eps}\\	
+    \caption{Correlations between individual features and survival}
+    \label{fig:Correlations between individual features and survival}
+\end{figure}
+\end{center}
+
+\end{slide}
+%%summarize
+%%==========================================================================================
+\begin{slide}{Summarize}
+\begin{center}
+
+\twotonebox{\rotatebox{90}{Defn}}{\parbox{.86\textwidth}
+{Data analysis and summary:
+\begin{itemize}
+\item PassengerId is ID, Ticket feature is difficult to find regularity, Cabin is too much missing, so it needs to be removed.
+\item The Name feature can extract part of gender, married and unmarried information, identity, etc. (The Name feature itself needs to be deleted).
+\item Sex, Pclass, Age, Embarked on, Fare are very important features, and a certain relationship is established between them.
+\item The missing data in Age, Embarked and Fare need to be embarked on.
+\end{itemize}
+}}
+\end{center}
+
+\end{slide}
+%%summarize
+%%==========================================================================================
+\section{Data Processing}
+
+%%==========================================================================================
+
+
+\begin{slide}{Data Processing}
+
+\begin{center}
+\begin{itemize}
+
+\item
+\smallskip
+\large
+{Delete invalid feature\\
+After the above analysis, Passengerld, Ticket and Cabin features were removed.\\
+}
+\item
+\smallskip
+\large
+{Extract valid features\\
+The Name feature, usually preceded by ".", represents an identity and can be extracted using a regular expression.\\
+}
+\item
+\smallskip
+\large
+{Transformation feature\\
+Since gender is represented as a string, we can represent it numerically.\\
+}
+
+\end{itemize}
+\end{center}
+
+\end{slide}
+
+%%==========================================================================================
+
+
+\begin{slide}{Missing value padding}
+
+\begin{center}
+\begin{itemize}
+
+\item
+\smallskip
+\large
+{1.Age\\
+Select the random selection of mean and standard deviation of Age under Pclass and Gender matching.\\
+}
+\item
+\smallskip
+\large
+{2.Embarked\\
+There are only two missing values in the training set, so we take the simplest most commonly used padding and convert it into a classified numerical feature.\\
+}
+\item
+\smallskip
+\large
+{3.Fare\\
+One sample in the test set is missing the Fare feature, and we simply fill it with the median.\\
+}
+
+\end{itemize}
+\end{center}
+
+\end{slide}
+
+%%==========================================================================================
+
+%%
+
+\section{Modelling}
+%%==========================================================================================
+%%
+\begin{slide}{Model Train}
+	
+\begin{center}
+\begin{itemize}
+
+\item
+\smallskip
+\large
+{Train\\
+Model: Logistic Regression\\
+
+Mode2: Decision Tree\\
+
+Mode3: KNN\\
+
+Mode4: Naive Bayes Classifier\\
+
+Mode5: SVM\\
+
+Mode6: MLP\\
+}
+
+\end{itemize}
+\end{center}
+\end{slide}
+
+%%==========================================================================================
+\begin{slide}{Train results}
+\begin{table}[htbp]
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\centering
+\caption{Train results}
+\begin{tabular}{ c | c }
+\toprule
+Algorithm & Score  \\
+\midrule
+$Support Vector Machines$
+&  {$0.827142$}\\
+$Decision Tree$
+&  {$0.824920$}\\
+$MLP$
+&  {$0.812592$}\\
+$KNN$
+&  {$0.811437$}\\
+$Logistic Regression$
+&  {$0.806955$}\\
+$Naive Bayes $
+&  {$0.783435$}\\
+\bottomrule	
+\end{tabular}
+\end{table}
+\end{slide}
+%%==========================================================================================
+
+%%
+
+\section{Prediction}
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Make Prediction}
+
+\begin{table}[htbp]
+\setlength{\abovecaptionskip}{1pt}
+\setlength{\belowcaptionskip}{3pt}
+\centering
+\caption{Partial test results}
+\begin{tabular}{ c | c }
+\toprule
+PassengerId & Survived  \\
+\midrule
+$892$
+&  {$1$}\\
+$893$
+&  {$1$}\\
+$894$
+&  {$0$}\\
+$895$
+&  {$1$}\\
+$896$
+&  {$0$}\\
+$897$
+&  {$1$}\\
+$898$
+&  {$0$}\\
+
+\bottomrule	
+\end{tabular}
+\end{table}
+%%==========================================================================================
+\end{slide}
+%%
+%%==========================================================================================
+
+%%==========================================================================================
+% TODO: Contact Page
+\begin{wideslide}[toc=,bm=]{Contact Information}
+\centering
+\vspace{\stretch{1}}
+\twocolumn[
+lcolwidth=0.35\linewidth,
+rcolwidth=0.65\linewidth
+]
+{
+% \centerline{\includegraphics[scale=.2]{tulip-logo.eps}}
+}
+{
+\vspace{\stretch{1}}
+Graduate student Ziqi Lin\\
+School of Economics and Management\\
+Nanjing University of Science and Technology, China
+\begin{description}
+ \item[\textcolor{orange}{\faEnvelope}] \href{mailto:jluo@tulip.org.au}
+ {\textsc{\footnotesize{zqlin@tulip.academy}}}
+
+ \item[\textcolor{orange}{\faHome}] \href{http://www.tulip.org.au}
+ {\textsc{\footnotesize{Team for Universal Learning and Intelligent Processing}}}
+\end{description}
+}
+\vspace{\stretch{1}}
+\end{wideslide}
+
+\end{document}
+
+\endinput

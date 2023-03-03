@@ -1,0 +1,60 @@
+\documentclass{amsart}
+\synctex=1
+
+%=================================================================
+% 
+\newcount\DraftStatus  % 0 suppresses notes to selves in text
+\DraftStatus=1   % TODO: set to 0 for final version
+%=================================================================
+
+%=================================================================
+\usepackage{comment}
+%=================================================================
+%
+\includecomment{JournalOnly}  
+\includecomment{ConferenceOnly}  
+\includecomment{TulipStyle}
+%
+%=================================================================
+\input{preamble}
+
+
+%=================================================================
+%
+\begin{document}
+%
+%=================================================================
+%
+\title[A Short Running Title]{Titanic: Machine Learning from Disaster}%
+
+\author{Ziqi Lin}
+\address[A.~1]{School of Economics and Management,\\ 
+Nanjing University of Science and Technology, China}%
+\email[A.~1]{zqlin@tulip.academy}
+
+%\thanks{Thanks to \ldots}%
+\subjclass{Artificial Intelligence}%
+\date{\gitAuthorDate}%
+
+\input{./tex/abstract}
+
+
+\maketitle
+\tableofcontents
+
+\newpage
+%=================================================================
+
+\input{./tex/mainbody}
+
+% ----------------------------------------------------------------
+\newpage
+\bibliography{tuliplab,yourbib}
+% TODO: you should change this yourbib into a proper bib file name
+\bibliographystyle{plainnat}
+%=================================================================
+
+\listoftodos
+
+\end{document}
+
